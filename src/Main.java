@@ -24,10 +24,10 @@ public class Main {
                 arr[j] = symbolArray[((i.divide(pow[j])).mod(BigInteger.valueOf(N))).intValue()];
             }
             //вывод в консоль
-            for (String ch : arr) {
-                System.out.print(ch + " ");
+            for (int j = 0; j < N; j++) {
+                System.out.print(arr[j] + " ");
             }
-            System.out.println("\nНомер комбинации: " + i);
+            System.out.println("\nНомер комбинации: " + i.add(BigInteger.valueOf(1)));
         }
     }
 
@@ -63,7 +63,7 @@ public class Main {
                     System.out.printf("[%s]", arr[j][k]);
                 }
             }
-            System.out.println("\nНомер комбинации: " + i);
+            System.out.println("\nНомер комбинации: " + i.add(BigInteger.valueOf(1)));
         }
     }
 }
