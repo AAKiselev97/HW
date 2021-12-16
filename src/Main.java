@@ -6,22 +6,22 @@ public class Main {
         calculationInMatrix(4, 4);
     }
 
-    public static void calculationInArray(int sum, int element) {
-        String[] symbolArray = new String[sum];//массив допустимых символов
-        for (int i = 0; i < sum; i++) {
-            symbolArray[i] = String.valueOf(i);//заполнение массива символами 0..sum
+    public static void calculationInArray(int N, int M) {//N - количество символов от 0 до N-1, M - количество элементов массива
+        String[] symbolArray = new String[N];//массив допустимых символов
+        for (int i = 0; i < N; i++) {
+            symbolArray[i] = String.valueOf(i);//заполнение массива символами 0..N
         }
-        BigInteger[] pow = new BigInteger[(element + 1)];//массив для степеней числа sum
+        BigInteger[] pow = new BigInteger[(M + 1)];//массив для степеней числа N
         pow[0] = new BigInteger("1");
-        for (int i = 1; i <= element; i++) {
-            pow[i] = new BigInteger(String.valueOf(pow[(i - 1)].multiply(BigInteger.valueOf(sum))));//вычисление количества комбинаций
+        for (int i = 1; i <= M; i++) {
+            pow[i] = new BigInteger(String.valueOf(pow[(i - 1)].multiply(BigInteger.valueOf(N))));//вычисление количества комбинаций
         }
         //перебор всех комбинаций
-        for (BigInteger i = new BigInteger(String.valueOf(0)); i.compareTo(pow[element]) < 0; i = i.add(BigInteger.valueOf(1))) {
-            String[] arr = new String[element];
+        for (BigInteger i = new BigInteger(String.valueOf(0)); i.compareTo(pow[M]) < 0; i = i.add(BigInteger.valueOf(1))) {
+            String[] arr = new String[M];
             //вычисляем элементы комбинации
-            for (int j = 0; j < element; j++) {
-                arr[j] = symbolArray[((i.divide(pow[j])).mod(BigInteger.valueOf(sum))).intValue()];
+            for (int j = 0; j < M; j++) {
+                arr[j] = symbolArray[((i.divide(pow[j])).mod(BigInteger.valueOf(N))).intValue()];
             }
             //вывод в консоль
             for (String ch : arr) {
@@ -31,35 +31,35 @@ public class Main {
         }
     }
 
-    public static void calculationInMatrix(int sum, int element) {
-        if ((Math.sqrt(element)) % 1 != 0) {
+    public static void calculationInMatrix(int N, int M) {//N - количество символов от 0 до N-1, M - количество элементов массива
+        if ((Math.sqrt(M)) % 1 != 0) {
             return;//если из элементов не построить матрицу - return
         }
-        int N = (int) Math.sqrt(element);
-        String[] symbolArray = new String[sum];//массив допустимых символов
-        for (int i = 0; i < sum; i++) {
-            symbolArray[i] = String.valueOf(i);//заполнение массива символами 0..sum
+        int length = (int) Math.sqrt(M);
+        String[] symbolArray = new String[N];//массив допустимых символов
+        for (int i = 0; i < N; i++) {
+            symbolArray[i] = String.valueOf(i);//заполнение массива символами 0..N
         }
-        BigInteger[] pow = new BigInteger[(element + 1)];//массив для степеней числа sum
+        BigInteger[] pow = new BigInteger[(M + 1)];//массив для степеней числа N
         pow[0] = new BigInteger("1");
-        for (int i = 1; i <= element; i++) {
-            pow[i] = new BigInteger(String.valueOf(pow[(i - 1)].multiply(BigInteger.valueOf(sum))));//вычисление количества комбинаций
+        for (int i = 1; i <= M; i++) {
+            pow[i] = new BigInteger(String.valueOf(pow[(i - 1)].multiply(BigInteger.valueOf(N))));//вычисление количества комбинаций
         }
         //перебор всех комбинаций
-        for (BigInteger i = new BigInteger(String.valueOf(0)); i.compareTo(pow[element]) < 0; i = i.add(BigInteger.valueOf(1))) {
-            String[][] arr = new String[N][N];
+        for (BigInteger i = new BigInteger(String.valueOf(0)); i.compareTo(pow[M]) < 0; i = i.add(BigInteger.valueOf(1))) {
+            String[][] arr = new String[length][length];
             //вычисляем элементы комбинации
-            for (int j = 0; j < element; j++) {
-                int i1 = ((i.divide(pow[j])).mod(BigInteger.valueOf(sum))).intValue();
-                if (j < N) {
+            for (int j = 0; j < M; j++) {
+                int i1 = ((i.divide(pow[j])).mod(BigInteger.valueOf(N))).intValue();
+                if (j < length) {
                     arr[0][j] = symbolArray[i1];
                 } else {
-                    arr[j / N][j % N] = symbolArray[i1];
+                    arr[j / length][j % length] = symbolArray[i1];
                 }
             }
-            for (int j = 0; j < N; j++) {
+            for (int j = 0; j < length; j++) {
                 System.out.println();
-                for (int k = 0; k < N; k++) {
+                for (int k = 0; k < length; k++) {
                     System.out.printf("[%s]", arr[j][k]);
                 }
             }
