@@ -50,12 +50,8 @@ public class Main {
             String[][] arr = new String[length][length];
             //вычисляем элементы комбинации
             for (int j = 0; j < M; j++) {
-                int i1 = ((i.divide(pow[j])).mod(BigInteger.valueOf(N))).intValue();
-                if (j < length) {
-                    arr[0][j] = symbolArray[i1];
-                } else {
-                    arr[j / length][j % length] = symbolArray[i1];
-                }
+                int result = ((i.divide(pow[j])).mod(BigInteger.valueOf(N))).intValue();
+                    arr[j / length][j % length] = symbolArray[result];
             }
             for (int j = 0; j < length; j++) {
                 System.out.println();
